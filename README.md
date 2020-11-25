@@ -42,7 +42,8 @@ The internal & external subnets are created as /25s nothing should be in them ex
 The "gw" module is comprised of:
 
     main.tf (This should move)
-      This loads the terraform providers & Azure agreements (Probably not needed if you already agreeded on-line)
+      This loads the terraform providers & Azure agreements (Probably not needed 
+      if you already agreeded on-line)
 
     variables.tf
       Defines the varables used by the module (see above.)
@@ -60,27 +61,31 @@ The "gw" module is comprised of:
       random string generator used for gloably unique names
     
     storage_account.tf
-      This creates the storage account used for boot diagnostics. We REALLY want this enabled as it is required
-      for the "Serial console" (so you can "fw unloadlocal"). As I'm not currently setting a password on admin,
+      This creates the storage account used for boot diagnostics. We REALLY want 
+      this enabled as it is required for the "Serial console" (so you can 
+      "fw unloadlocal"). As I'm not currently setting a password on admin,
       you should do that right away. Passwords are disabled for ssh.
 
     networking.tf
       This is where all things networking are created. In order (within the file):
       One vnet named basename-vnet (local.vnetname).
 
-      Two subnets for the gateway (var.extnet & var.intnet) each a /25 in the ${var.network}.0 network,
-      e.g. 10.10.0.0/25 (external) and 10.10.0.128/25 (internal).
+      Two subnets for the gateway (var.extnet & var.intnet) each a /25 in the 
+      ${var.network}.0 network, e.g. 10.10.0.0/25 (external) and 10.10.0.128/25 
+      (internal).
 
-      A routing table (UDR) named rt2gw with a default route to the internal interface of the gateway.
-      Additional routes can be added as needed with additional "route {}" blocks.
+      A routing table (UDR) named rt2gw with a default route to the internal 
+      interface of the gateway. Additional routes can be added as needed with 
+      additional "route {}" blocks.
 
-      A public IP for the gateway (local.gwpip0) which is attached to the external interface's primary 
-      private IP address (local.gwint0).
+      A public IP for the gateway (local.gwpip0) which is attached to the 
+      external interface's primary private IP address (local.gwint0).
 
       Two interfaces for the gateway (local.gwint0 and local.gwint1)
 
-      I am not creating any security groups (NSG), but this is where I would put them. As I generalise this more,
-      I will probably break this up.
+      I am not creating any security groups (NSG), but this is where I would put 
+      them. As I generalise this more, I will probably break this up.
 
     gateway.tf
-      This is where I put it all together and create the gateway. See the file itself for documentation.
+      This is where I put it all together and create the gateway. 
+      See the file itself for documentation.
