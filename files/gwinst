@@ -1,0 +1,15 @@
+#!/usr/bin/python3 /etc/cloud_config.py
+
+installationType="gateway"
+allowUploadDownload="true"
+osVersion= "R81"
+templateName="single"
+templateVersion="20201102"
+isBlink="true"
+bootstrapScript64="base64encode(commands.sh)"
+location="eastus2"
+sicKey="ncKJeFN7BF9Bpbhn"
+managementGUIClientNetwork="0.0.0.0/0"
+primary="false"
+secondary="false"
+logserver="false"
