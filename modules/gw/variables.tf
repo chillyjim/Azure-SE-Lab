@@ -24,3 +24,8 @@ variable "intnet" {
   description = "The name of the gateway's internal network"
   default     = "backend"
 }
+
+#subscription_id
+#client_id
+#client_secret
+#tenant_id

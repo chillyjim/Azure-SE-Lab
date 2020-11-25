@@ -3,16 +3,16 @@
 */
 
 ## This is how we build a vm
-resource "azurerm_virtual_machine" "gw" { # The second parameter is a reference name
-  name                             = local.gwname # The actual name of the gateway's VM
-  location                         = azurerm_resource_group.rg.location # The location of it's resource group
-  resource_group_name              = azurerm_resource_group.rg.name # The name of the Resource group
+resource "azurerm_virtual_machine" "gw" {                                                                       # The second parameter is a reference name
+  name                             = local.gwname                                                               # The actual name of the gateway's VM
+  location                         = azurerm_resource_group.rg.location                                         # The location of it's resource group
+  resource_group_name              = azurerm_resource_group.rg.name                                             # The name of the Resource group
   network_interface_ids            = [azurerm_network_interface.gweth0.id, azurerm_network_interface.gweth1.id] # Network interfaces to attach
-  primary_network_interface_id     = azurerm_network_interface.gweth0.id # Which interface is considered primary
-  vm_size                          = "Standard_DS2_v2" # Machine size. Fixed for now.
-  delete_data_disks_on_termination = true # Without this the disks don't get removed
-  delete_os_disk_on_termination    = true
-  depends_on                       = [azurerm_marketplace_agreement.checkpoint] # Agree to the T&Cs
+  primary_network_interface_id     = azurerm_network_interface.gweth0.id                                        # Which interface is considered primary
+  vm_size                          = "Standard_DS2_v2"                                                          # Machine size. Fixed for now.
+  delete_data_disks_on_termination = true                                                                       # Without this the disks don't get removed
+  delete_os_disk_on_termination    = true                                                                       # Same as above
+  depends_on                       = [azurerm_marketplace_agreement.checkpoint]                                 # Agree to the T&Cs
 
   ## Next we create a disk for the VM
   storage_os_disk {
@@ -21,13 +21,13 @@ resource "azurerm_virtual_machine" "gw" { # The second parameter is a reference 
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
-  
+
   ## Where is the image comming from
   storage_image_reference {
     publisher = "checkpoint"
     offer     = "check-point-cg-r81" # name of the image
-    sku       = "sg-byol" # the SKU. sg="Single Gareway" 
-    version   = "latest" # use the lateset version
+    sku       = "sg-byol"            # the SKU. sg="Single Gareway" 
+    version   = "latest"             # use the lateset version
   }
   ## This will match above
   plan {
@@ -38,7 +38,7 @@ resource "azurerm_virtual_machine" "gw" { # The second parameter is a reference 
   ## OS Settings
   os_profile {
     computer_name  = local.gwname
-    admin_username = "notused" # We don't care about this, azure requires it
+    admin_username = "notused"               # We don't care about this, azure requires it
     custom_data    = file("../files/gwinst") # We can feed in a script here. See README.md for more info
   }
 
@@ -53,7 +53,7 @@ resource "azurerm_virtual_machine" "gw" { # The second parameter is a reference 
 
   ## We WANT boot diagnostics, it is required for the "serial console" to work
   boot_diagnostics {
-    enabled     = "true" 
+    enabled     = "true"
     storage_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
   }
 

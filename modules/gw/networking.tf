@@ -47,7 +47,7 @@ resource "azurerm_route_table" "rt2gw" {
     name                   = "default"
     address_prefix         = "0.0.0.0/0"
     next_hop_type          = "VirtualAppliance"
-    next_hop_in_ip_address = azurerm_network_interface.gweth1.private_ip_address  # Like name & location, this is a refference value
+    next_hop_in_ip_address = azurerm_network_interface.gweth1.private_ip_address # Like name & location, this is a refference value
   }
 
   tags = {
@@ -78,7 +78,7 @@ resource "azurerm_network_interface" "gweth0" {
   resource_group_name           = azurerm_resource_group.rg.name
   enable_ip_forwarding          = true
   enable_accelerated_networking = true
-  
+
   # Main IP address with the Gateways PIP
   ip_configuration {
     name                          = local.gwip0
@@ -86,7 +86,7 @@ resource "azurerm_network_interface" "gweth0" {
     subnet_id                     = azurerm_subnet.frontend.id
     private_ip_address_allocation = "Static"
     private_ip_address            = cidrhost(azurerm_subnet.frontend.address_prefix, 4) # adds 4 to the subnet address
-    public_ip_address_id          = azurerm_public_ip.gwpip0.id # Built above
+    public_ip_address_id          = azurerm_public_ip.gwpip0.id                         # Built above
   }
 }
 
