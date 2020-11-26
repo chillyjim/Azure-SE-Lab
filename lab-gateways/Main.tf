@@ -5,12 +5,13 @@ terraform {
 module "gw" {
     source = "../modules/gw"
     location = "eastus2"
-    basename = "paris"
-    network = "10.25"
+    basename = "management"
+    network = "10.16"
     #extnet = "Options external network name"
     #intnet = "Optional internal network name"
 }
 
+/*
 module "frankford" {
     source = "../modules/gw"
     location = "eastus2"
@@ -28,3 +29,4 @@ module "london" {
     #extnet = "Options external network name"
     #intnet = "Optional internal network name"
 }
+*/
