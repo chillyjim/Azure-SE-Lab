@@ -4,7 +4,7 @@
 */
 
 locals {
-  vnetrg   = "${var.basename}-main-rg" # The existing vnet's resource group
+  vnetrg = "${var.basename}-main-rg" # The existing vnet's resource group
 
 
   ## Manager Locals ##

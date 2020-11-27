@@ -17,11 +17,18 @@
 */
 
 ## Manager's Subnet ##
+data "azurerm_virtual_network" "myvnet" {
+  name                 = var.vnetname
+  resource_group_name  = local.vnetrg
+}
+
 resource "azurerm_subnet" "mgrnet" {
   name                 = var.netname                         # Subnet name as passed to the module
-  resource_group_name  = local.vnetrg      # Name of existing vnet
+  resource_group_name  = local.vnetrg                        # Name of existing vnet
   virtual_network_name = var.vnetname                        # Name of the existing vnat
   address_prefix       = "${var.network}.${var.mgrsub}.0/24" # The subnet address
+
+  depends_on = [ data.azurerm_virtual_network.myvnet ]
 }
 
 ### Network interfaces ###

@@ -4,14 +4,15 @@
 */
 
 resource "azurerm_virtual_machine" "mgr01" {
-  name                         = local.mgrname
-  location                     = azurerm_resource_group.rg.location
-  resource_group_name          = azurerm_resource_group.rg.name
-  network_interface_ids        = [azurerm_network_interface.mgreth0.id]
-  primary_network_interface_id = azurerm_network_interface.mgreth0.id
-  vm_size                      = "Standard_D2s_v3"
-
-  depends_on = [azurerm_marketplace_agreement.checkpoint]
+  name                             = local.mgrname
+  location                         = azurerm_resource_group.rg.location
+  resource_group_name              = azurerm_resource_group.rg.name
+  network_interface_ids            = [azurerm_network_interface.mgreth0.id]
+  primary_network_interface_id     = azurerm_network_interface.mgreth0.id
+  vm_size                          = "Standard_DS2_v2"
+  delete_data_disks_on_termination = true                                       # Without this the disks don't get removed
+  delete_os_disk_on_termination    = true                                       # Same as above
+  depends_on                       = [azurerm_marketplace_agreement.checkpoint] # Agree to the T&Cs
 
   storage_os_disk {
     name              = "R81sDisk-${local.mgrname}"
@@ -35,13 +36,13 @@ resource "azurerm_virtual_machine" "mgr01" {
   os_profile {
     computer_name  = local.mgrname
     admin_username = "notused"
-    custom_data    = file("../../files/mgrinit")
+    custom_data    = file("../files/mgmtcommands.sh")
   }
 
   os_profile_linux_config {
     disable_password_authentication = true
     ssh_keys {
-      key_data = file("../../files/id_rsa.pub")
+      key_data = file("../files/id_rsa.pub")
       path     = "/home/notused/.ssh/authorized_keys"
     }
   }
