@@ -42,7 +42,7 @@ EOT
 /usr/bin/python3 /etc/cloud_config.py config.txt
 
 cd
-#rm -rf ${DIR}
+rm -rf ${DIR}
 
 #config_system -s "install_security_gw=false&install_security_managment=true&install_mgmt_primary=true&mgmt_admin_radio=gaia_admin&mgmt_gui_clients_radio=any&download_info=true&upload_info=true&ftw_sic_key=''"
 

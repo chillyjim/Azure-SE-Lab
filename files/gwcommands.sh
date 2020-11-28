@@ -45,5 +45,4 @@ base64 -d setup_commands.b64 > setup_commands.clish
 
 
 cd
-#rm -rf ${DIR}
-
+rm -rf ${DIR}
