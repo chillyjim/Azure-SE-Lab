@@ -39,7 +39,7 @@ resource "azurerm_virtual_machine" "gw" {                                       
   os_profile {
     computer_name  = local.gwname
     admin_username = "notused"               # We don't care about this, azure requires it
-    custom_data    = file("../files/gwinst") # We can feed in a script here. See README.md for more info
+    custom_data    = file("../files/gwcommands.sh") # We can feed in a script here. See README.md for more info
   }
 
   ## I use SSH Keys. Change "key_data" to your public key
