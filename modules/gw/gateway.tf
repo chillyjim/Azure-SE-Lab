@@ -5,8 +5,8 @@
 ## This is how we build a vm
 resource "azurerm_virtual_machine" "gw" {                                                                       # The second parameter is a reference name
   name                             = local.gwname                                                               # The actual name of the gateway's VM
-  location                         = local.location                                         # The location of it's resource group
-  resource_group_name              = local.rgname                                             # The name of the Resource group
+  location                         = local.location                                                             # The location of it's resource group
+  resource_group_name              = local.rgname                                                               # The name of the Resource group
   network_interface_ids            = [azurerm_network_interface.gweth0.id, azurerm_network_interface.gweth1.id] # Network interfaces to attach
   primary_network_interface_id     = azurerm_network_interface.gweth0.id                                        # Which interface is considered primary
   vm_size                          = "Standard_DS2_v2"                                                          # Machine size. Fixed for now.
@@ -38,7 +38,7 @@ resource "azurerm_virtual_machine" "gw" {                                       
   ## OS Settings
   os_profile {
     computer_name  = local.gwname
-    admin_username = "notused"               # We don't care about this, azure requires it
+    admin_username = "notused"                      # We don't care about this, azure requires it
     custom_data    = file("../files/gwcommands.sh") # We can feed in a script here. See README.md for more info
   }
 

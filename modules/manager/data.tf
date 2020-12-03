@@ -3,8 +3,8 @@ data "azurerm_resource_group" "rg" {
 }
 
 data "azurerm_virtual_network" "vnet" {
-  name                 = local.vnetname
-  resource_group_name  = local.rgname
+  name                = local.vnetname
+  resource_group_name = local.rgname
 }
 
 data "azurerm_subnet" "mgrnetname" {

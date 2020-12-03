@@ -16,6 +16,6 @@ variable "intnet" {
 }
 
 variable "endpoint" {
-  type = string
+  type        = string
   description = "primary_blob_endpoint"
 }

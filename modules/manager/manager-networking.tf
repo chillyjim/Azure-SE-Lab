@@ -19,18 +19,18 @@
 
 ### PIPs for the Manager ###
 resource "azurerm_public_ip" "mgrpip0" {
-  name                = local.mgrpip0                      # Derived name for the public IP address
+  name                = local.mgrpip0  # Derived name for the public IP address
   location            = local.location # Retrive the resource group's name
-  resource_group_name = local.rgname     # and location
-  allocation_method   = "Static"                           # Options are "Static" or "Dynamic" we want static to keep the IP Address
+  resource_group_name = local.rgname   # and location
+  allocation_method   = "Static"       # Options are "Static" or "Dynamic" we want static to keep the IP Address
 }
 
 ## The Managers's interfaces
 resource "azurerm_network_interface" "mgreth0" {
-  name                          = local.mgrint0                      # Derived name for the interface in Azure (not the OS name)
+  name                          = local.mgrint0  # Derived name for the interface in Azure (not the OS name)
   location                      = local.location # Retrive the resource group's name
-  resource_group_name           = local.rgname     # and location
-  enable_ip_forwarding          = false                              # The manager doesn't forward traffic
+  resource_group_name           = local.rgname   # and location
+  enable_ip_forwarding          = false          # The manager doesn't forward traffic
   enable_accelerated_networking = true
 
   # Main IP address with the Managers PIP
@@ -40,6 +40,6 @@ resource "azurerm_network_interface" "mgreth0" {
     subnet_id                     = data.azurerm_subnet.mgrnetname.id
     private_ip_address_allocation = "Static"
     private_ip_address            = cidrhost(data.azurerm_subnet.mgrnetname.address_prefix, 4) # adds 4 to the subnet address
-    public_ip_address_id          = azurerm_public_ip.mgrpip0.id                      # Built above
+    public_ip_address_id          = azurerm_public_ip.mgrpip0.id                               # Built above
   }
 }

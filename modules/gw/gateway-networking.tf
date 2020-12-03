@@ -39,7 +39,7 @@ resource "azurerm_network_interface" "gweth0" {
     subnet_id                     = local.extnetid
     private_ip_address_allocation = "Static"
     private_ip_address            = cidrhost(data.azurerm_subnet.externalnet.address_prefix, 4) # adds 4 to the subnet address
-    public_ip_address_id          = azurerm_public_ip.gwpip0.id                         # Built above
+    public_ip_address_id          = azurerm_public_ip.gwpip0.id                                 # Built above
   }
 }
 
