@@ -5,7 +5,10 @@
 
 locals {
   vnetname = "${var.basename}-vnet"
-  vnetrg   = "${var.basename}-main-rg"
+  rgname   = "${var.basename}-rg"
+  location = data.azurerm_resource_group.rg.location
+  intnetid = "${data.azurerm_virtual_network.vnet.id}/subnets/${var.intnet}"
+  extnetid = "${data.azurerm_virtual_network.vnet.id}/subnets/${var.extnet}"
 
 
 
@@ -23,3 +26,4 @@ locals {
 
   gwpip0 = "${local.gwname}-pip0"
 }
+

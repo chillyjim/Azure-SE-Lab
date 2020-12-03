@@ -7,3 +7,11 @@ resource "azurerm_storage_account" "mystorageaccount" {
   account_replication_type = "LRS"
 
 }
+
+output "diagname" {
+  value = azurerm_storage_account.mystorageaccount.name
+}
+
+output "endpoint" {
+  value = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
+}

@@ -5,8 +5,8 @@
 ## This is how we build a vm
 resource "azurerm_virtual_machine" "gw" {                                                                       # The second parameter is a reference name
   name                             = local.gwname                                                               # The actual name of the gateway's VM
-  location                         = azurerm_resource_group.rg.location                                         # The location of it's resource group
-  resource_group_name              = azurerm_resource_group.rg.name                                             # The name of the Resource group
+  location                         = local.location                                         # The location of it's resource group
+  resource_group_name              = local.rgname                                             # The name of the Resource group
   network_interface_ids            = [azurerm_network_interface.gweth0.id, azurerm_network_interface.gweth1.id] # Network interfaces to attach
   primary_network_interface_id     = azurerm_network_interface.gweth0.id                                        # Which interface is considered primary
   vm_size                          = "Standard_DS2_v2"                                                          # Machine size. Fixed for now.
@@ -54,7 +54,7 @@ resource "azurerm_virtual_machine" "gw" {                                       
   ## We WANT boot diagnostics, it is required for the "serial console" to work
   boot_diagnostics {
     enabled     = "true"
-    storage_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
+    storage_uri = var.endpoint
   }
 
 }

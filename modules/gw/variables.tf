@@ -1,16 +1,6 @@
-variable "location" {
-  description = "Location for the vnet REQUIRED"
-  type        = string
-}
-
 variable "basename" {
   type        = string
   description = "This will be used in locals to build other names REQUIRED"
-}
-
-variable "network" {
-  type    = string
-  default = "10.115"
 }
 
 variable "extnet" {
@@ -25,7 +15,7 @@ variable "intnet" {
   default     = "backend"
 }
 
-#subscription_id
-#client_id
-#client_secret
-#tenant_id
+variable "endpoint" {
+  type = string
+  description = "primary_blob_endpoint"
+}

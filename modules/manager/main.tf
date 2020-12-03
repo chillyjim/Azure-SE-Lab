@@ -5,6 +5,7 @@ terraform {
   required_version = ">= 0.12"
 }
 
+/*
 provider "azurerm" {
   version = "=1.44.0"
 
@@ -17,6 +18,7 @@ provider "azurerm" {
 provider "random" {
   version = "= 2.2.1"
 }
+*/
 
 # Agreements
 
@@ -33,3 +35,4 @@ resource "azurerm_marketplace_agreement" "chkp-gw" {
   offer     = "check-point-cg-r81"
   plan      = "sg-byol"
 }
+

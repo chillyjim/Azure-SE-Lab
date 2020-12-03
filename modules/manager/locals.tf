@@ -4,10 +4,13 @@
 */
 
 locals {
-  vnetrg = "${var.basename}-main-rg" # The existing vnet's resource group
+  vnetname = "${var.basename}-vnet"
+  rgname   = "${var.basename}-rg"
+  location = data.azurerm_resource_group.rg.location
+  intnetid = "${data.azurerm_virtual_network.vnet.id}/subnets/${var.netname}"
 
 
-  ## Manager Locals ##
+  # Manager Locals #
   mgrname     = "${var.basename}-mgr"
   mgr-rg-name = "${local.mgrname}-rg"
   mgrint0     = "${local.mgrname}-eth0"

@@ -1,0 +1,18 @@
+### Routing Tables (UDR) ###
+resource "azurerm_route_table" "rt2gw" {
+  name                          = "rt2gw"
+  location                      = azurerm_resource_group.rg.location
+  resource_group_name           = azurerm_resource_group.rg.name
+  disable_bgp_route_propagation = true
+
+  route {
+    name                   = "default"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = azurerm_network_interface.gweth1.private_ip_address # Like name & location, this is a refference value
+  }
+
+  tags = {
+    environment = "Production"
+  }
+}

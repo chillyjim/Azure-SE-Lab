@@ -2,9 +2,10 @@
    I suspect I'll also pull the modules in here that I need eventaly as I learn how to use them */
 
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 0.13"
 }
 
+/*
 provider "azurerm" {
   version = "=1.44.0"
 
@@ -17,6 +18,7 @@ provider "azurerm" {
 provider "random" {
   version = "= 2.2.1"
 }
+*/
 
 # Agreements
 

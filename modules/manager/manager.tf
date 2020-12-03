@@ -5,8 +5,8 @@
 
 resource "azurerm_virtual_machine" "mgr01" {
   name                             = local.mgrname
-  location                         = azurerm_resource_group.rg.location
-  resource_group_name              = azurerm_resource_group.rg.name
+  location                         = local.location
+  resource_group_name              = local.rgname
   network_interface_ids            = [azurerm_network_interface.mgreth0.id]
   primary_network_interface_id     = azurerm_network_interface.mgreth0.id
   vm_size                          = "Standard_DS2_v2"
@@ -49,7 +49,7 @@ resource "azurerm_virtual_machine" "mgr01" {
 
   boot_diagnostics {
     enabled     = "true"
-    storage_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
+    storage_uri = var.endpoint
   }
 
 }
