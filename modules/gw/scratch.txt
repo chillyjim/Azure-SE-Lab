@@ -1,3 +1,5 @@
+Just some notes
+
 ### Routing Tables (UDR) ###
 resource "azurerm_route_table" "rt2gw" {
   name                          = "rt2gw"

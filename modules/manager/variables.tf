@@ -11,5 +11,6 @@ variable "netname" {
 }
 
 variable "endpoint" {
-  type = string
+  type        = string
+  description = "Storage account for diagnostics"
 }

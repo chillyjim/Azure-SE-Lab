@@ -1,5 +1,12 @@
 
+/*
+  This builds out an arbatry number of subnets.
+  We feed the module a base CIDR range, an a list
+  of network names and sizes. 
 
+  The "dynamic" section itterates through the returned
+  list and creates all the subnets
+*/
 module "subnet_addrs" {
   source = "hashicorp/subnets/cidr"
 
@@ -21,14 +28,3 @@ resource "azurerm_virtual_network" "vnet" {
     }
   }
 }
-
-
-/*
-output "list" {
-  value = var.subnets.size
-}
-
-output "subnetslist" {
-  value = local.sublist
-}
-*/

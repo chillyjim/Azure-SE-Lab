@@ -1,16 +1,18 @@
+/*
+  This will build out an Ubuntu host.
+  local.<key> are derived names from "locals.tf"
+*/
 
-
-
-resource "azurerm_virtual_machine" "linux" {                                                                    # The second parameter is a reference name
-  name                             = local.hostname                                                             # The actual name of the gateway's VM
-  location                         = local.location                                                             # The location of it's resource group
-  resource_group_name              = local.rgname                                                               # The name of the Resource group
+resource "azurerm_virtual_machine" "linux" {                             # The second parameter is a reference name
+  name                             = local.hostname                      # The actual name of the host's VM
+  location                         = local.location                      # The location of it's resource group
+  resource_group_name              = local.rgname                        # The name of the Resource group
   network_interface_ids            = [azurerm_network_interface.int0.id] # Network interfaces to attach
-  primary_network_interface_id     = azurerm_network_interface.int0.id                                        # Which interface is considered primary
-  vm_size                          = "Standard_B1s"                                                             # Machine size. Fixed for now.
-  delete_data_disks_on_termination = true                                                                       # Without this the disks don't get removed
-  delete_os_disk_on_termination    = true                                                                       # Same as above
-  #depends_on                       = [azurerm_marketplace_agreement.checkpoint]                                 # Agree to the T&Cs
+  primary_network_interface_id     = azurerm_network_interface.int0.id   # Which interface is considered primary
+  vm_size                          = "Standard_B1s"                      # Machine size. Fixed for now.
+  delete_data_disks_on_termination = true                                # Without this the disks don't get removed
+  delete_os_disk_on_termination    = true                                # Same as above
+
 
   ## Next we create a disk for the VM
   storage_os_disk {
@@ -20,26 +22,28 @@ resource "azurerm_virtual_machine" "linux" {                                    
     managed_disk_type = "Standard_LRS"
   }
 
-  ## Where is the image comming from
+  ## Where is the image comming from. I have yet to figure out a good
+  ## way to get this info other than deploying from the market place
+  ## and looking at the template generated
   storage_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer" # name of the image
-    sku       = "18.04-LTS"    # the SKU. sg="Single Gareway" 
+    sku       = "18.04-LTS"    # the SKU.  
     version   = "latest"       # use the lateset version
   }
 
   ## OS Settings
   os_profile {
     computer_name  = local.hostname
-    admin_username = var.username                   # We don't care about this, azure requires it
-    #custom_data    = file("../files/hostcommands.sh") # We can feed in a script here. See README.md for more info
+    admin_username = var.username # This user will be added to /etc/sudoers with full rights
+    #custom_data    = file("../files/hostcommands.sh") # We can feed in a script or just commands to be excuted after boot
   }
 
   ## I use SSH Keys. Change "key_data" to your public key
   os_profile_linux_config {
     disable_password_authentication = true
     ssh_keys {
-      key_data = file("~/.ssh/id_rsa.pub")
+      key_data = file("../files/id_rsa.pub")
       path     = "/home/${var.username}/.ssh/authorized_keys"
     }
   }

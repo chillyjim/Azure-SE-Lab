@@ -1,3 +1,9 @@
+/*
+  These were built elsewhere, different module, portal, etc.
+  If not built out of the included "common" module, adjust the
+  nameing convention in "locals.tf"
+*/
+
 data "azurerm_resource_group" "rg" {
   name = local.rgname
 }

@@ -22,7 +22,6 @@ module "gw" {
     source = "../modules/gw"
     location = "eastus2"
     basename = "paris"
-    network = "10.25"
     #extnet = "Options external network name"
     #intnet = "Optional internal network name"
 }

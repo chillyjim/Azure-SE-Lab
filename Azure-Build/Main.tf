@@ -1,24 +1,26 @@
+/* Example build out */
+
 terraform {
   required_version = ">= 0.13"
 }
 
 module "common" {
   source          = "../modules/common/"
-  location        = "eastus2"
-  basename        = "troy"
-  base_cidr_block = "10.200.0.0/16"
+  location        = var.location
+  basename        = var.basename
+  base_cidr_block = var.cidr
   networks = [
     {
-      name     = "frontend"
+      name     = var.externalname
       new_bits = 26 - 16
     },
     {
-      name     = "backend"
+      name     = var.internalname
       new_bits = 26 - 16
     },
     {
-      name     = "management"
-      new_bits = 24 - 16
+      name     = var.managementname
+      new_bits = 26 - 16
     },
     {
       name     = "lan"
@@ -33,9 +35,9 @@ module "common" {
 
 module "gw" {
   source   = "../modules/gw"
-  basename = "troy"
-  extnet   = "frontend"
-  intnet   = "backend"
+  basename = var.basename
+  extnet   = var.externalname
+  intnet   = var.internalname
   endpoint = module.common.endpoint
   depends_on = [
     module.common,
@@ -44,8 +46,8 @@ module "gw" {
 
 module "mgr" {
   source   = "../modules/manager"
-  basename = "troy"
-  netname  = "management"
+  basename = var.basename
+  netname  = var.managementname
   endpoint = module.common.endpoint
   depends_on = [
     module.common,
@@ -58,7 +60,7 @@ output "Manager_Public_IP_Address" {
 
 module "linuxhost" {
   source   = "../modules/ubuntu"
-  basename = "troy"
+  basename = var.basename
   hostname = "linux-1"
   subnet   = "lan"
   endpoint = module.common.endpoint
@@ -69,12 +71,12 @@ module "linuxhost" {
 }
 
 output "Linuxhost_public_ip" {
-  value = "module.linuxhost.Host_public_ip"
+  value = module.linuxhost.Host_public_ip
 }
 
 module "linuxDMZ" {
   source   = "../modules/ubuntu"
-  basename = "troy"
+  basename = var.basename
   hostname = "linux-DMZ"
   subnet   = "lan"
   endpoint = module.common.endpoint
@@ -85,5 +87,5 @@ module "linuxDMZ" {
 }
 
 output "LinuxDMZ_public_ip" {
-  value = "module.linuxhost.Host_public_ip"
+  value = module.linuxDMZ.Host_public_ip
 }

@@ -1,24 +1,11 @@
-/* This for now anyway is just grabing the providers
-   I suspect I'll also pull the modules in here that I need eventaly as I learn how to use them */
+/* 
+  This for now anyway is just grabing the providers
+  
+*/
 
 terraform {
   required_version = ">= 0.12"
 }
-
-/*
-provider "azurerm" {
-  version = "=1.44.0"
-
-  #subscription_id = var.subscription_id
-  #client_id = var.client_id
-  #client_secret = var.client_secret
-  #tenant_id = var.tenant_id
-}
-
-provider "random" {
-  version = "= 2.2.1"
-}
-*/
 
 # Agreements
 

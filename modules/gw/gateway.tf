@@ -37,7 +37,7 @@ resource "azurerm_virtual_machine" "gw" {                                       
   }
   ## OS Settings
   os_profile {
-    computer_name  = local.gwname
+    computer_name  = local.gwname                   # hostname
     admin_username = "notused"                      # We don't care about this, azure requires it
     custom_data    = file("../files/gwcommands.sh") # We can feed in a script here. See README.md for more info
   }
@@ -51,7 +51,8 @@ resource "azurerm_virtual_machine" "gw" {                                       
     }
   }
 
-  ## We WANT boot diagnostics, it is required for the "serial console" to work
+  ## We WANT boot diagnostics, it is required for the "serial console" to work.
+  ## NOTE: set a password for admin. 
   boot_diagnostics {
     enabled     = "true"
     storage_uri = var.endpoint
