@@ -33,6 +33,7 @@ module "common" {
   ]
 }
 
+/* Disabled for testing
 module "gw" {
   source   = "../modules/gw"
   basename = var.basename
@@ -64,7 +65,7 @@ module "linuxhost" {
   hostname = "linux-1"
   subnet   = "lan"
   endpoint = module.common.endpoint
-  username = "jlh"
+  username = var.username
   depends_on = [
     module.common,
   ]
@@ -80,7 +81,7 @@ module "linuxDMZ" {
   hostname = "linux-DMZ"
   subnet   = "lan"
   endpoint = module.common.endpoint
-  username = "jlh"
+  username = var.username
   depends_on = [
     module.common,
   ]
@@ -88,4 +89,18 @@ module "linuxDMZ" {
 
 output "LinuxDMZ_public_ip" {
   value = module.linuxDMZ.Host_public_ip
+}
+*/
+
+module "win10" {
+  source   = "../modules/win10"
+  basename = var.basename
+  hostname = "Windows"
+  subnet   = "lan"
+  endpoint = module.common.endpoint
+  username = var.username
+  password = var.password
+  depends_on = [
+    module.common,
+  ]
 }
