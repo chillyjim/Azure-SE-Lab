@@ -1,5 +1,7 @@
 ### Use at your own risk 
 
+### The general concepts are still valid, but I've made a lot of changes. The down directories readmes are updateed.
+
 This project is designed to to build (and eventualy configure) a Check Point lab in Azure,
 using Terraform.
 
