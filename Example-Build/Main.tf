@@ -90,7 +90,7 @@ module "linuxDMZ" {
 output "LinuxDMZ_public_ip" {
   value = module.linuxDMZ.Host_public_ip
 }
-*/
+
 
 module "win10" {
   source   = "../modules/win10"
@@ -104,3 +104,5 @@ module "win10" {
     module.common,
   ]
 }
+*/
+
