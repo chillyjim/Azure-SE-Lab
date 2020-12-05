@@ -17,11 +17,6 @@ variable "subnet" {
   description = "Name of the subnet"
 }
 
-variable "endpoint" {
-  type        = string
-  description = "primary_blob_endpoint for the diagnostic account"
-}
-
 variable "username" {
   type        = string
   description = "Admin use name"

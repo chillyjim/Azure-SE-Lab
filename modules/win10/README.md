@@ -1,12 +1,14 @@
 This will build a simple Unbutu VM with a public IP address (static) and a dynamic private IP.
-If don't know how to tell terraform to use the "next available" private IP
+If don't know how to tell terraform to use the "next available" private IP.
+
+A not of Storage account, the "azure_windows_virtual_machine" provider doesn't allow for blob storage,
+so for diagnostics, you need to use managed storage disks. 
 
 Files:
   varables.tf - Input varables.
     basename - Used to construct other names.
     hostname - The name of the host. Can be altered in locals.tf.
     subnet - Subnet to be place in.
-    endpoint - The storage account for the diagnostics.
     username - The administrative user. NOTE: I use ssh keys for login, no password is set.
 
   data.tf - Gathers information from existing resources.
@@ -23,5 +25,5 @@ Files:
     pip0 - Public IP address name
 
   networking.tf - Create all the network parts needed. See comments in file.
-  server.tf - The actual VM configuration. 
+  windows.tf - The actual VM configuration. 
   outputs.tf - Return values.
