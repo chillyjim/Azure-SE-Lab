@@ -22,6 +22,7 @@ locals {
   gwip2    = "${local.gwname}-ip2"
   
   gwpip0 = "${local.gwname}-pip0"
-  gwpip1 = "${local.gwname}-pip1"
+  gwpip1 = "${local.gwname}-pip1" # not used for naming consistancy
+  gwpip2 = "${local.gwname}-pip2"
 }
 

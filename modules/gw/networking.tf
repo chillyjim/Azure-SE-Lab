@@ -22,7 +22,7 @@ resource "azurerm_public_ip" "gwpip0" {
   allocation_method   = "Static"
 }
 resource "azurerm_public_ip" "gwpip1" {
-  name                = local.gwpip1
+  name                = local.gwpip2
   location            = local.location
   resource_group_name = local.rgname
   allocation_method   = "Static"
@@ -48,7 +48,7 @@ resource "azurerm_network_interface" "gweth0" {
     public_ip_address_id          = azurerm_public_ip.gwpip0.id                                 # Built above
   }
   ip_configuration {
-    name                          = local.gwip1
+    name                          = local.gwip2
     primary                       = false
     subnet_id                     = local.extnetid
     private_ip_address_allocation = "Static"
@@ -90,7 +90,7 @@ resource "azurerm_network_interface" "gweth1" {
       ROUTER = tostring(cidrhost(data.azurerm_subnet.internalnet.address_prefix, 1))
     }
   }
-  provisioner = "local-exec" {
+  provisioner "local-exec" {
     command = "echo SICKEY=$${SICKEY} >> ../files/gwcommands.sh"
     environment = {
       SICKEY = tostring(var.sickey)

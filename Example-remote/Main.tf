@@ -33,7 +33,7 @@ module "common" {
   ]
 }
 
-/* Disabled for testing
+
 module "gw" {
   source   = "../modules/gw"
   basename = var.basename
@@ -45,7 +45,11 @@ module "gw" {
   ]
 }
 
-module "mgr" {
+output "Gateway_public_ip" {
+  value = module.gw.Gateway_public_ip
+}
+
+/*module "mgr" {
   source   = "../modules/manager"
   basename = var.basename
   netname  = var.managementname
@@ -57,7 +61,7 @@ module "mgr" {
 
 output "Manager_Public_IP_Address" {
   value = module.mgr.Manager_Public_ip
-}
+}*/
 
 module "linuxhost" {
   source   = "../modules/ubuntu"
@@ -75,7 +79,7 @@ output "Linuxhost_public_ip" {
   value = module.linuxhost.Host_public_ip
 }
 
-module "linuxDMZ" {
+/*module "linuxDMZ" {
   source   = "../modules/ubuntu"
   basename = var.basename
   hostname = "linux-DMZ"
@@ -97,12 +101,22 @@ module "win10" {
   basename = var.basename
   hostname = "Windows"
   subnet   = "lan"
-  endpoint = module.common.endpoint
   username = var.username
   password = var.password
   depends_on = [
     module.common,
   ]
 }
-*/
 
+
+module "win2019" {
+  source   = "../modules/winserver"
+  basename = var.basename
+  hostname = "winserver"
+  subnet   = "dmz"
+  username = var.username
+  password = var.password
+  depends_on = [
+    module.common,
+  ]
+}*/

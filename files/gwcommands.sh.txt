@@ -1,6 +1,3 @@
-NET=10.200.0.0/16
-ROUTER=10.200.0.65
-SICKEY=Cpwins1!
 #!/bin/bash
 ### /etc/cloud_config.py on gaia just wont process this.
 
