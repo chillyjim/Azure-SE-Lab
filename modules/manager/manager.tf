@@ -12,7 +12,7 @@ resource "azurerm_virtual_machine" "mgr01" {                                    
   vm_size                          = "Standard_DS2_v2"                          # Machine size. Fixed for now.
   delete_data_disks_on_termination = true                                       # Without this the disks don't get removed
   delete_os_disk_on_termination    = true                                       # Same as above
-  depends_on                       = [azurerm_marketplace_agreement.checkpoint] # Agree to the T&Cs
+  #depends_on                       = [azurerm_marketplace_agreement.chkp-mgmt-byol] # Agree to the T&Cs
 
   ## The disk for the VM
   storage_os_disk {

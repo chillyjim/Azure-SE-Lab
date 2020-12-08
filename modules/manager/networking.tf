@@ -12,6 +12,8 @@
   I can and get back the same addresses. It also save a little bit of time.
 */
 
+/* Use only if not behind a gateway doing NAT
+
 ### PIPs for the Manager ###
 resource "azurerm_public_ip" "mgrpip0" {
   name                = local.mgrpip0  # Derived name for the public IP address
@@ -19,6 +21,7 @@ resource "azurerm_public_ip" "mgrpip0" {
   resource_group_name = local.rgname   # and location
   allocation_method   = "Static"       # Options are "Static" or "Dynamic" we want static to keep the IP Address
 }
+*/
 
 ## The Managers's interfaces
 resource "azurerm_network_interface" "mgreth0" {
@@ -35,6 +38,6 @@ resource "azurerm_network_interface" "mgreth0" {
     subnet_id                     = data.azurerm_subnet.mgrnetname.id                          # My subnet
     private_ip_address_allocation = "Static"                                                   # We want the manager's IP not to change.
     private_ip_address            = cidrhost(data.azurerm_subnet.mgrnetname.address_prefix, 4) # adds 4 to the subnet address
-    public_ip_address_id          = azurerm_public_ip.mgrpip0.id                               # Built above
+    #public_ip_address_id          = azurerm_public_ip.mgrpip0.id                               # Uncomment if no gateway
   }
 }

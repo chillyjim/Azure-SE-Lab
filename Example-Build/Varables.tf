@@ -36,10 +36,17 @@ variable "managementname" {
 ## Sizes can be changed there as well.
 
 variable "username" {
-  type    = string
-  default = "jlh"
+  type = string
+  description = "Workstation's admin user name"
 }
 
 variable "password" {
   type = string
+  description = "password for abover username"
+}
+
+variable "sickey" {
+  type = string
+  description = "OTP for establish SIC"
+  default = "Cpwins1!"
 }

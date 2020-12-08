@@ -12,7 +12,10 @@ resource "azurerm_virtual_machine" "gw" {                                       
   vm_size                          = "Standard_DS2_v2"                                                          # Machine size. Fixed for now.
   delete_data_disks_on_termination = true                                                                       # Without this the disks don't get removed
   delete_os_disk_on_termination    = true                                                                       # Same as above
-  depends_on                       = [azurerm_marketplace_agreement.checkpoint]                                 # Agree to the T&Cs
+  #depends_on                       = [azurerm_marketplace_agreement.chkp-sg-byol]                                 # Agree to the T&Cs
+  depends_on = [
+    azurerm_network_interface.gweth1
+  ]
 
   ## Next we create a disk for the VM
   storage_os_disk {

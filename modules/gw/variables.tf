@@ -19,3 +19,8 @@ variable "endpoint" {
   type        = string
   description = "primary_blob_endpoint"
 }
+
+variable "sickey" {
+  type = string
+  description = "One time password to establish SIC"
+}

@@ -12,3 +12,8 @@ data "azurerm_subnet" "mgrnetname" {
   virtual_network_name = local.vnetname
   resource_group_name  = local.rgname
 }
+
+data "azurerm_virtual_machine" "mygw" {
+  name = local.gwname
+  resource_group_name = local.rgname
+}
