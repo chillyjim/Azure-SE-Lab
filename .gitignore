@@ -38,3 +38,4 @@ terraform.rc
 .vscode
 scratchpad.txt
 Peering.tf
+nohup.out

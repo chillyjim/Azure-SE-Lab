@@ -7,7 +7,7 @@ locals {
   vnetname = "${var.basename}-vnet"                  # Name of the virtual network
   rgname   = "${var.basename}-rg"                    # My resource group
   location = data.azurerm_resource_group.rg.location # The region I'm using
-  gwname = "${var.basename}-gw"
+  gwname   = "${var.basename}-gw"
 
 
   # Manager Locals #

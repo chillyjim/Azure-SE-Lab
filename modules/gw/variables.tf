@@ -21,6 +21,6 @@ variable "endpoint" {
 }
 
 variable "sickey" {
-  type = string
+  type        = string
   description = "One time password to establish SIC"
 }

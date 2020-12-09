@@ -14,6 +14,6 @@ data "azurerm_subnet" "mgrnetname" {
 }
 
 data "azurerm_virtual_machine" "mygw" {
-  name = local.gwname
+  name                = local.gwname
   resource_group_name = local.rgname
 }

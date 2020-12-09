@@ -3,15 +3,15 @@
   local.<key> are derived names from "locals.tf"
 */
 
-resource "azurerm_virtual_machine" "mgr01" {                                    # The second parameter is a reference name
-  name                             = local.mgrname                              # The actual name of the host's VM
-  location                         = local.location                             # The location of it's resource group
-  resource_group_name              = local.rgname                               # The name of the Resource group
-  network_interface_ids            = [azurerm_network_interface.mgreth0.id]     # Network interfaces to attach
-  primary_network_interface_id     = azurerm_network_interface.mgreth0.id       # Which interface is considered primary
-  vm_size                          = "Standard_DS2_v2"                          # Machine size. Fixed for now.
-  delete_data_disks_on_termination = true                                       # Without this the disks don't get removed
-  delete_os_disk_on_termination    = true                                       # Same as above
+resource "azurerm_virtual_machine" "mgr01" {                                # The second parameter is a reference name
+  name                             = local.mgrname                          # The actual name of the host's VM
+  location                         = local.location                         # The location of it's resource group
+  resource_group_name              = local.rgname                           # The name of the Resource group
+  network_interface_ids            = [azurerm_network_interface.mgreth0.id] # Network interfaces to attach
+  primary_network_interface_id     = azurerm_network_interface.mgreth0.id   # Which interface is considered primary
+  vm_size                          = "Standard_DS2_v2"                      # Machine size. Fixed for now.
+  delete_data_disks_on_termination = true                                   # Without this the disks don't get removed
+  delete_os_disk_on_termination    = true                                   # Same as above
   #depends_on                       = [azurerm_marketplace_agreement.chkp-mgmt-byol] # Agree to the T&Cs
 
   ## The disk for the VM

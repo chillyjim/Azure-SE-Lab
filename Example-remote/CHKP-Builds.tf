@@ -1,5 +1,4 @@
-## Build a Security Gateway and Manager
-
+## Build a Security Gateway
 
 module "gw" {
   source   = "../modules/gw"
@@ -34,17 +33,4 @@ output "Gateway_Public_IP_Address" {
 
 output "Manager_Public_IP_Address" {
   value = module.gw.Manager_Public_ip
-}
-
-module "mgr" {
-  source   = "../modules/manager"
-  basename = var.basename
-  netname  = var.managementname
-  endpoint = module.common.endpoint
-
-  depends_on = [
-    module.common,
-    module.gw,
-    #module.agreements
-  ]
 }

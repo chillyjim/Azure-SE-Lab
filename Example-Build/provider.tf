@@ -3,16 +3,16 @@
 */
 
 terraform {
-#  required_version = "0.13"
+  #  required_version = "0.13"
 }
 
 provider "azurerm" {
-#  version = ">= 2.39.0"
+  #  version = ">= 2.39.0"
   features {}
 }
 
 provider "random" {
- # version = ">= 2.2.1"
+  # version = ">= 2.2.1"
 }
 
 /*# Agreements

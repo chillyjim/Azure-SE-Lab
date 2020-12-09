@@ -79,14 +79,14 @@ resource "azurerm_network_interface" "gweth1" {
   provisioner "local-exec" {
     command = "echo NET=$${NET} > ../files/gwcommands.sh"
     environment = {
-      NET = tostring(data.azurerm_virtual_network.vnet.address_space[0])
+      NET    = tostring(data.azurerm_virtual_network.vnet.address_space[0])
       ROUTER = tostring(cidrhost(data.azurerm_subnet.internalnet.address_prefix, 1))
     }
   }
   provisioner "local-exec" {
     command = "echo ROUTER=$${ROUTER} >> ../files/gwcommands.sh"
     environment = {
-      NET = tostring(data.azurerm_virtual_network.vnet.address_space[0])
+      NET    = tostring(data.azurerm_virtual_network.vnet.address_space[0])
       ROUTER = tostring(cidrhost(data.azurerm_subnet.internalnet.address_prefix, 1))
     }
   }
@@ -99,7 +99,7 @@ resource "azurerm_network_interface" "gweth1" {
   provisioner "local-exec" {
     command = "cat ../files/gwcommands.sh.txt >> ../files/gwcommands.sh"
     environment = {
-      NET = tostring(data.azurerm_virtual_network.vnet.address_space[0])
+      NET    = tostring(data.azurerm_virtual_network.vnet.address_space[0])
       ROUTER = tostring(cidrhost(data.azurerm_subnet.internalnet.address_prefix, 1))
     }
   }

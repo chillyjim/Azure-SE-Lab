@@ -4,11 +4,11 @@ variable "basename" {
 }
 
 variable "networks" {
-  type = list(string)
+  type        = list(string)
   description = "Subnet names to apply this table to"
 }
 
 variable "dg" {
-  type = string
+  type        = string
   description = "Default Gateway"
 }

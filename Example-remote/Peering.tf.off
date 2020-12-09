@@ -1,0 +1,44 @@
+## This is for my lab - Creates a peering connection with one of my vNets
+
+data "azurerm_resource_group" "rg" {
+  name = "${var.basename}-rg"
+  depends_on = [
+    module.common,
+  ]
+}
+
+data "azurerm_virtual_network" "vnet" {
+  name                = "${var.basename}-vnet"
+  resource_group_name = "${var.basename}-rg"
+  depends_on = [
+    module.common,
+  ]
+}
+
+data "azurerm_resource_group" "myrg" {
+  name = "win10"
+}
+
+data "azurerm_virtual_network" "myvnet" {
+  name                = "Jims_stuff"
+  resource_group_name = "win10"
+}
+
+resource "azurerm_virtual_network_peering" "to_jim" {
+  name                      = "from_${var.basename}"
+  resource_group_name       = "${var.basename}-rg"
+  virtual_network_name      = "${var.basename}-vnet"
+  remote_virtual_network_id = data.azurerm_virtual_network.myvnet.id
+  depends_on = [
+    module.common,
+  ]
+}
+resource "azurerm_virtual_network_peering" "from_jim" {
+  name                      = "to_${var.basename}"
+  resource_group_name       = data.azurerm_resource_group.myrg.name
+  virtual_network_name      = data.azurerm_virtual_network.myvnet.name
+  remote_virtual_network_id = data.azurerm_virtual_network.vnet.id
+  depends_on = [
+    module.common,
+  ]
+}
