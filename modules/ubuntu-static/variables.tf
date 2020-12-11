@@ -17,6 +17,11 @@ variable "subnet" {
   description = "Name of the subnet"
 }
 
+variable "ip_addr" {
+  type        = string
+  description = "The private IP address"
+}
+
 variable "endpoint" {
   type        = string
   description = "primary_blob_endpoint for the diagnostic account"
@@ -25,4 +30,16 @@ variable "endpoint" {
 variable "username" {
   type        = string
   description = "Admin use name"
+}
+
+variable "tags" {
+  type = list(object({
+    name  = string
+    value = string
+  }))
+  description = "List of tags"
+  default = [{
+    name  = "notag"
+    value = "true"
+  }]
 }

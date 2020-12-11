@@ -60,5 +60,8 @@ resource "azurerm_virtual_machine" "gw" {                                       
     enabled     = "true"
     storage_uri = var.endpoint
   }
-
+  tags = {
+    for tag in var.tags :
+    tag.name => tag.value
+  }
 }

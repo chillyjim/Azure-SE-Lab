@@ -15,4 +15,21 @@ locals {
   int0 = "${local.hostname}-eth0" # Network interface name
   ip0  = "${local.hostname}-ip0"  # Interface IP name
   pip0 = "${local.hostname}-pip0" # Public IP name
+
+
+  tags = [
+    {
+      name   = "a"
+      number = 1
+    },
+    {
+      name   = "b"
+      number = 2
+    },
+    {
+      name   = "c"
+      number = 3
+    },
+  ]
+
 }

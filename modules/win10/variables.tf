@@ -26,3 +26,15 @@ variable "password" {
   type        = string
   description = "user's password"
 }
+
+variable "tags" {
+  type = list(object({
+    name  = string
+    value = string
+  }))
+  description = "List of tags"
+  default = [{
+    name  = "notag"
+    value = "true"
+  }]
+}

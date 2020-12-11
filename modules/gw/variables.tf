@@ -24,3 +24,15 @@ variable "sickey" {
   type        = string
   description = "One time password to establish SIC"
 }
+
+variable "tags" {
+  type = list(object({
+    name  = string
+    value = string
+  }))
+  description = "List of tags"
+  default = [{
+    name  = "notag"
+    value = "true"
+  }]
+}

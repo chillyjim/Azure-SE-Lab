@@ -3,6 +3,7 @@
   local.<key> are derived names from "locals.tf"
 */
 
+
 resource "azurerm_virtual_machine" "linux" {                             # The second parameter is a reference name
   name                             = local.hostname                      # The actual name of the host's VM
   location                         = local.location                      # The location of it's resource group
@@ -54,4 +55,8 @@ resource "azurerm_virtual_machine" "linux" {                             # The s
     storage_uri = var.endpoint
   }
 
+  tags = {
+    for tag in var.tags :
+    tag.name => tag.value
+  }
 }

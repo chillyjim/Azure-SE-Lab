@@ -19,4 +19,9 @@ resource "azurerm_windows_virtual_machine" "win10" {
     sku       = "19h2-pro"   # the SKU.  
     version   = "latest"     # use the lateset version
   }
+
+  tags = {
+    for tag in var.tags :
+    tag.name => tag.value
+  }
 }

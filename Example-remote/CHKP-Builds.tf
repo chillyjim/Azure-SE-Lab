@@ -7,6 +7,28 @@ module "gw" {
   intnet   = var.internalname
   endpoint = module.common.endpoint
   sickey   = var.sickey
+  tags = [
+    {
+      name  = "use"
+      value = "gateway"
+    },
+    {
+      name  = "ssh"
+      value = "true"
+    },
+    {
+      name  = "os"
+      value = "gaia"
+    },
+    {
+      name  = "x-chkp-management"
+      value = "tmp-mgr"
+    },
+    {
+      name  = "x-chkp-template"
+      value = "central"
+    }
+  ]
   depends_on = [
     module.common,
     #module.agreements

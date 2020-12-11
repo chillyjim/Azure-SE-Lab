@@ -1,18 +1,30 @@
+/* 
+  All varables are required
+*/
 
 variable "basename" {
   type        = string
   description = "This will be used in locals to build other names REQUIRED"
 }
 
-variable "netname" {
+variable "hostname" {
   type        = string
-  description = "The name of the managers subnet"
-  default     = "management"
+  description = "The name of the host"
+}
+
+variable "subnet" {
+  type        = string
+  description = "Name of the subnet"
 }
 
 variable "endpoint" {
   type        = string
-  description = "Storage account for diagnostics"
+  description = "primary_blob_endpoint for the diagnostic account"
+}
+
+variable "username" {
+  type        = string
+  description = "Admin use name"
 }
 
 variable "tags" {
