@@ -22,7 +22,8 @@ The modules are:
   common -- builds the common infrastructure
   gw -- builds a gateway (R81)
   manager -- a manager (R81)
-  unbutu -- a linux host
+  unbutu-dynamic -- a linux host
+  unbutu-static -- Linux host with a static IP. Also generates a PIP.
 
 To be build:
   Windows10 - Windows box
